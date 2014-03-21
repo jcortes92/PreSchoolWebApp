@@ -1,0 +1,36 @@
+div {
+  border: 1px solid blue;
+  width: auto;
+  padding: 5px; }
+
+#contenedor {
+  width: 95%;
+  height: 90%;
+  background-color: gray;
+  position: absolute; }
+  #contenedor #superior {
+    background-color: white; }
+  #contenedor #medio {
+    padding: 5px;
+    height: 80%; }
+    #contenedor #medio #medio-cabecera {
+      width: 90%;
+      float: left;
+      height: 10px; }
+    #contenedor #medio #columnas {
+      height: 90%;
+      border: none;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 10px; }
+      #contenedor #medio #columnas .center-columns {
+        float: left;
+        width: 46%;
+        height: 90%;
+        padding: 5px;
+        margin: 5px;
+        position: relative; }
+      #contenedor #medio #columnas #izq {
+        width: 60%; }
+      #contenedor #medio #columnas #der {
+        width: 30%; }

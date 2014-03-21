@@ -1,0 +1,54 @@
+div {
+	border: 1px solid blue;
+	width: auto;
+	
+	padding:5px;
+}
+	#contenedor{
+		width: 95%;
+		height: 90%;
+		background-color: gray;
+		position: absolute;
+
+		#superior{
+			background-color: white;
+		}
+		#medio{
+			padding: 5px;
+			height: 80%;
+
+			#medio-cabecera{
+				width: 90%;
+				float: left;
+				height: 10px;
+			}
+			#columnas{
+				height: 90%;
+				border:none;
+				margin-left: auto;
+				margin-right: auto;
+				padding: 10px;
+
+				.center-columns{
+
+				float: left;
+				width: 46%;
+				height: 90%;
+				padding: 5px;
+				margin: 5px;
+				position: relative;
+				}
+
+				#izq{
+					width: 60%;
+				}
+				#der{
+					width: 30%;
+				}
+			}
+			
+		}
+		#footer{
+			
+		}
+	}
