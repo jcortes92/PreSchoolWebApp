@@ -1,0 +1,10 @@
+div {
+	border: 1px, solid, black;
+	border-color: black;
+	border-style: solid;
+	width: auto;
+	height: auto;
+}
+#contenedor{
+	width: 90%;
+}
