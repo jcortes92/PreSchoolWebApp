@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<!--http://juegoscanvas.blogspot.com.es/2012/01/parte-1-dibujando-en-el-canvas.html
+	Parte 1. Dibujando en el canvas
+	-->
+<html lang="es">
+<head>
+	<style>
+	*{
+		font-family: courier;
+	}
+	#contenedor{
+		position: absolute;
+	}
+	#divcanvas{
+		position: relative;
+		margin-right: 50px;
+		margin-left: 50px;
+	}
+	</style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!--[if lte IE 8]><meta http-equiv="X-UA-Compatible" content="chrome=1" /><![endif]-->
+<title>Mi primer juego canvas</title>
+</head>
+
+<body>
+<h1>Mi primer juego canvas</h1>
+
+<div id="contenedor"><div id="divcanvas">
+<p><canvas id="canvas" width="300" height="150" style="background:#999">
+Canvas not supported by your browser.
+</canvas></p></div></div>
+
+<script type="application/javascript" src="game.js"></script>
+</body>
+</html>
