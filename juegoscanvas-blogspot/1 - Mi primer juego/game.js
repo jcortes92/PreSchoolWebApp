@@ -1,19 +1,19 @@
-
-window.addEventListener('load',init,false);//Cuando termina de cargar la página, la escucha empieza a ejecutar init()
+window.addEventListener('load',init,false);//Cuando termina de cargar la página, la escucha empieza a ejecutar init
 var canvas=null,ctx=null;
 var lastPress=null;
 var pause=true;
 var gameover=true;
 var dir=0;
 var score=0;
-var player=new Rectangle(40,40,10,10);
+var body = [];
 var food=new Rectangle(80,80,10,10);
-var wall=new Array();
+// var wall=new Array();
 
-wall.push(new Rectangle(100,50,10,10));
-wall.push(new Rectangle(100,100,10,10));
-wall.push(new Rectangle(200,50,10,10));
-wall.push(new Rectangle(200,100,10,10));
+// wall.push(new Rectangle(100,50,10,10));
+// wall.push(new Rectangle(100,100,10,10));
+// wall.push(new Rectangle(200,50,10,10));
+// wall.push(new Rectangle(200,100,10,10));
+var body = new Array();
 
 var KEY_ENTER=13;
 var KEY_LEFT=37;
@@ -22,7 +22,7 @@ var KEY_RIGHT=39;
 var KEY_DOWN=40;
 
 function random(max){
-    return Math.floor(Math.random()*max);
+    return ~(Math.random()*max);
 }
 //Comienzo de ejecución del código. Obtiene el canvas donde vamos a pintar 
 //y su contexto 2d, equivalente al pincel con el que se va a pintar (ctx)
@@ -46,8 +46,10 @@ function repaint(){
 function reset(){
     score=0;
     dir=1;
-    player.x=40;
-    player.y=40;
+    body.length=0;
+    body.push(new Rectangle(40,40,10,10));
+    body.push(new Rectangle(0,0,10,10));
+    body.push(new Rectangle(0,0,10,10));
     food.x=random(canvas.width/10-1)*10;
     food.y=random(canvas.height/10-1)*10;
     gameover=false;
@@ -58,55 +60,70 @@ function act(){
         // GameOver Reset
         if(gameover)
             reset();
-        
+
+        // Move Body
+        for(var i=body.length-1;i>0;i--){
+            body[i].x=body[i-1].x;
+            body[i].y=body[i-1].y;
+        }
+     
         // Change Direction
-        if(lastPress==KEY_UP)
+        if(lastPress==KEY_UP&&dir!=2)
             dir=0;
-        if(lastPress==KEY_RIGHT)
+        if(lastPress==KEY_RIGHT&&dir!=3)
             dir=1;
-        if(lastPress==KEY_DOWN)
+        if(lastPress==KEY_DOWN&&dir!=0)
             dir=2;
-        if(lastPress==KEY_LEFT)
+        if(lastPress==KEY_LEFT&&dir!=1)
             dir=3;
 
-        // Move Rect
+        // Move Head
         if(dir==0)
-            player.y-=10;
+            body[0].y-=10;
         if(dir==1)
-            player.x+=10;
+            body[0].x+=10;
         if(dir==2)
-            player.y+=10;
+            body[0].y+=10;
         if(dir==3)
-            player.x-=10;
+            body[0].x-=10;
 
         // Out Screen
-        if(player.x>canvas.width)
-            player.x=0;
-        if(player.y>canvas.height)
-            player.y=0;
-        if(player.x<0)
-            player.x=canvas.width;
-        if(player.y<0)
-            player.y=canvas.height;
-        
-        // Food Intersects
-        if(player.intersects(food)){
-            score++;
-            food.x=random(canvas.width/10-1)*10;
-            food.y=random(canvas.height/10-1)*10;
-        }
-        
+        if(body[0].x>canvas.width-body[0].width)
+            body[0].x=0;
+        if(body[0].y>canvas.height-body[0].height)
+            body[0].y=0;
+        if(body[0].x<0)
+            body[0].x=canvas.width-body[0].width;
+        if(body[0].y<0)
+            body[0].y=canvas.height-body[0].height;
+     
         // Wall Intersects
-        for(var i=0,l=wall.length;i<l;i++){
-            if(food.intersects(wall[i])){
-                food.x=random(canvas.width/10-1)*10;
-                food.y=random(canvas.height/10-1)*10;
-            }
-            
-            if(player.intersects(wall[i])){
+        //for(var i=0,l=wall.length;i<l;i++){
+        //    if(food.intersects(wall[i])){
+        //        food.x=random(canvas.width/10-1)*10;
+        //        food.y=random(canvas.height/10-1)*10;
+        //    }
+        //  
+        //    if(body[0].intersects(wall[i])){
+        //        gameover=true;
+        //        pause=true;
+        //    }
+        //}
+     
+        // Body Intersects
+        for(var i=2,l=body.length;i<l;i++){
+            if(body[0].intersects(body[i])){
                 gameover=true;
                 pause=true;
             }
+        }
+     
+        // Food Intersects
+        if(body[0].intersects(food)){
+            body.push(new Rectangle(food.x,food.y,10,10));
+            score++;
+            food.x=random(canvas.width/10-1)*10;
+            food.y=random(canvas.height/10-1)*10;
         }
     }
     // Pause/Unpause
@@ -120,11 +137,14 @@ function paint(ctx){
     ctx.fillStyle='#000';//asigna un color de relleno a ctx
     ctx.fillRect(0,0,canvas.width,canvas.height); //dibuja un rectangulo con las coordenadas dadas con ctx
     ctx.fillStyle='#0f0';
-    player.fill(ctx);
-    ctx.fillStyle='#999';
-    for(var i=0,l=wall.length;i<l;i++){
-        wall[i].fill(ctx);
+    for(var i=0,l=body.length;i<l;i++){
+        body[i].fill(ctx);
+        // ctx.drawImage(iBody,body[i].x,body[i].y);
     }
+    // ctx.fillStyle='#999';
+    // for(var i=0,l=wall.length;i<l;i++){
+    //     wall[i].fill(ctx);
+    // }
     ctx.fillStyle='#f00';
     food.fill(ctx);
     
