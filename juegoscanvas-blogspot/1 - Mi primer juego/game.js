@@ -6,7 +6,7 @@ var gameover=true;
 var dir=0;
 var score=0;
 var body = [];
-var food=new Rectangle(80,80,10,10);
+var food=new Rectangle(90,80,10,10);
 // var wall=new Array();
 
 // wall.push(new Rectangle(100,50,10,10));
@@ -27,7 +27,7 @@ function random(max){
 //Comienzo de ejecución del código. Obtiene el canvas donde vamos a pintar 
 //y su contexto 2d, equivalente al pincel con el que se va a pintar (ctx)
 function init(){
-    canvas=document.getElementById('canvas');
+    canvas=document.getElementById('canvas1');
     ctx=canvas.getContext('2d');
     run();
     repaint();
@@ -141,15 +141,16 @@ function paint(ctx){
         body[i].fill(ctx);
         // ctx.drawImage(iBody,body[i].x,body[i].y);
     }
+    
     // ctx.fillStyle='#999';
     // for(var i=0,l=wall.length;i<l;i++){
     //     wall[i].fill(ctx);
     // }
-    ctx.fillStyle='#f00';
+    ctx.fillStyle='#f01';
     food.fill(ctx);
     
-    ctx.fillStyle='#AAA';
-    ctx.font="15px AAA";
+    ctx.fillStyle='#AA1';
+    ctx.font="15px AA1";
     //ctx.fillText('Last Press: '+lastPress,0,20);
     ctx.fillText('Score: '+score,0,10);
     if(pause){
