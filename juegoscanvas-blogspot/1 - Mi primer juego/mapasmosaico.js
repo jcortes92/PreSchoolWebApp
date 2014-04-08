@@ -12,7 +12,7 @@
     var pressing=[];
     var pause;
     var gameover=true;
-    var player=new Rectangle(40,40,10,10);
+    var player=new Rectangle(25,0,15,15);
     var wall=[];
     var lava=[];
     var line= [];
@@ -159,9 +159,14 @@ function display(m) {
         lava.length=0;
         for(var i=0;i<text.length;i++){
             for(var j=0; j<text[i].length;j++){
-                if( (text[i][j]=='-') || (text[i][j]=='+')||(text[i][j]=='|'))
+                if((text[i][j]=='+')||(text[i][j]=='|')||(text[i][j]=='-'))
                     wall.push(new Rectangle(col*blockSize,row*blockSize,blockSize,blockSize));
                 
+//                    if ((text[i][j]=='-') && (text[i][j+1]=='-') && (text[i][j+2]=='-')){
+//                    wall.push(new Rectangle(col*blockSize,row*blockSize,blockSize,blockSize));
+//                        wall.push(new Rectangle(col*blockSize,row*blockSize,blockSize,blockSize));
+//                        
+//                    }
                 col++;
                 if(col>=columns){
                     row++;
@@ -176,8 +181,8 @@ function display(m) {
         ctx=canvas.getContext('2d');
         canvas.width=300;
         canvas.height=200;
-        document.getElementById('out').innerHTML = display(maze(2,3));
-        setMap(text,15,10);
+        document.getElementById('out').innerHTML = display(maze(4,3));
+        setMap(text,15,20);
         run();
         repaint();
     }
@@ -266,18 +271,14 @@ function display(m) {
     function paint(ctx){
         ctx.fillStyle='#000';
         ctx.fillRect(0,0,canvas.width,canvas.height);
-        
         ctx.fillStyle='#0f0';
         player.fill(ctx);
         ctx.fillStyle='#169aff';
         for(var i=0;i<wall.length;i++)
             wall[i].fill(ctx);
-        ctx.fillStyle='#f00';
-        for(var i=0;i<lava.length;i++)
-            lava[i].fill(ctx);
         
-        ctx.fillStyle='#fff';
-        ctx.fillText('Last Key: '+lastPress,0,20);
+//        ctx.fillStyle='#fff';
+//        ctx.fillText('Last Key: '+lastPress,0,20);
         if(pause){
             ctx.textAlign='center';
             if(gameover)
