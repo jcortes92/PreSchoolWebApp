@@ -17,6 +17,9 @@
     var lava=[];
     var line= [];
     var text= [];
+
+    display(maze(2,3));
+        document.getElementById('out').innerHTML= display(maze(4,5)); 
 // //MAZE CODE
 //     function maze(x,y) {
 //     var n=x*y-1;
@@ -149,7 +152,8 @@ function display(m) {
 }
 
     function setMap(map,columns,blockSize){
-        display(maze(3,2));
+        
+
         var col=0;
         var row=0;
         wall.length=0;
@@ -171,9 +175,9 @@ function display(m) {
     function init(){
         canvas=document.getElementById('canvas2');
         ctx=canvas.getContext('2d');
-        canvas.width=200;
-        canvas.height=300;
-        setMap(text,7,25);
+        canvas.width=300;
+        canvas.height=200;
+        setMap(text,15,10);
         run();
         repaint();
     }
