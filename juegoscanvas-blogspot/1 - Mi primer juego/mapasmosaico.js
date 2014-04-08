@@ -18,8 +18,7 @@
     var line= [];
     var text= [];
 
-    display(maze(2,3));
-        document.getElementById('out').innerHTML= display(maze(4,5)); 
+
 // //MAZE CODE
 //     function maze(x,y) {
 //     var n=x*y-1;
@@ -177,6 +176,7 @@ function display(m) {
         ctx=canvas.getContext('2d');
         canvas.width=300;
         canvas.height=200;
+        document.getElementById('out').innerHTML = display(maze(2,3));
         setMap(text,15,10);
         run();
         repaint();
