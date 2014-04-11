@@ -12,7 +12,7 @@
     var pressing=[];
     var pause;
     var gameover=true;
-    var player=new Rectangle(25,0,15,15);
+    var player=new Rectangle(25,0,20,20);
     var wall=[];
     var lava=[];
     var line= [];
@@ -244,14 +244,14 @@ function display(m) {
             }
             
             // Out Screen
-            if(player.x>canvas.width)
-                player.x -= 20;
-            if(player.y>canvas.height)
-                player.y -= 20;
+            if(player.x>canvas.width-player.width)
+                player.x -= 10;
+            if(player.y>=canvas.height)
+                player.y -= 10;
             if(player.x<0)
-                player.x += 20;
+                player.x += 10;
             if(player.y<0)
-                player.y += 20;
+                player.y += 10;
                 
             // Player Intersects Lava
             for(var i=0;i<lava.length;i++){
@@ -269,11 +269,11 @@ function display(m) {
     }
 
     function paint(ctx){
-        ctx.fillStyle='#000';
+        ctx.fillStyle='#FFE200';
         ctx.fillRect(0,0,canvas.width,canvas.height)
-        ctx.fillStyle='#0f0';
+        ctx.fillStyle='#FF1300';
         player.fill(ctx);
-        ctx.fillStyle='#169aff';
+        ctx.fillStyle='#1379FC';
         for(var i=0;i<wall.length;i++)
             wall[i].fill(ctx);
         
