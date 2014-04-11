@@ -160,7 +160,7 @@ function display(m) {
         for(var i=0;i<text.length;i++){
             for(var j=0; j<text[i].length;j++){
                 if((text[i][j]=='+')||(text[i][j]=='|')||(text[i][j]=='-'))
-                    wall.push(new Rectangle(col*blockSize,row*blockSize,blockSize,blockSize));
+                    wall.push(new Rectangle(col*blockSize,row*blockSize*2.5,blockSize*2,blockSize*2.5));
                 
 //                    if ((text[i][j]=='-') && (text[i][j+1]=='-') && (text[i][j+2]=='-')){
 //                    wall.push(new Rectangle(col*blockSize,row*blockSize,blockSize,blockSize));
@@ -179,8 +179,8 @@ function display(m) {
     function init(){
         canvas=document.getElementById('canvas2');
         ctx=canvas.getContext('2d');
-        canvas.width=300;
-        canvas.height=200;
+        canvas.width=280;
+        canvas.height=450;
         document.getElementById('out').innerHTML = display(maze(4,3));
         setMap(text,15,20);
         run();
@@ -245,13 +245,13 @@ function display(m) {
             
             // Out Screen
             if(player.x>canvas.width)
-                player.x -= 11;
+                player.x -= 20;
             if(player.y>canvas.height)
-                player.y -= 11;
+                player.y -= 20;
             if(player.x<0)
-                player.x += 11;
+                player.x += 20;
             if(player.y<0)
-                player.y += 11;
+                player.y += 20;
                 
             // Player Intersects Lava
             for(var i=0;i<lava.length;i++){
@@ -270,7 +270,7 @@ function display(m) {
 
     function paint(ctx){
         ctx.fillStyle='#000';
-        ctx.fillRect(0,0,canvas.width,canvas.height);
+        ctx.fillRect(0,0,canvas.width,canvas.height)
         ctx.fillStyle='#0f0';
         player.fill(ctx);
         ctx.fillStyle='#169aff';
