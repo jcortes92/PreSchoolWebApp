@@ -8,12 +8,17 @@
 		font-family: courier;
 	}
 	#contenedor{
-		position: absolute;
+		
+		width: 80%;
+		margin-left: auto;
+		margin-right: auto;
+		text-align: center;
+		border: 1px solid black;
 	}
 	#divcanvas{
 		position: relative;
-		margin-right: 50px;
-		margin-left: 50px;
+		margin-left:auto;
+		margin-right: auto;
 	}
 	</style>
 <meta charset="UTF-8" />
@@ -28,22 +33,14 @@
 
 <div id="contenedor">
 	<div id="divcanvas">
-<!--
 		<p>
-			<canvas id="canvas1" width="300" height="150" style="background:#999">Canvas not supported by your browser.
-			</canvas>
-		</p>
--->
-		<p>
-			<canvas id="canvas2" width="280" height="450" style="background:#69FF39">
+			<canvas id="canvas2" width="450" height="280" style="background:#69FF39">
 				Canvas not supported by your browser.
 			</canvas>
 		</p>
 		<pre id="out"></pre>
 	</div>
 </div>
-
-<!--<script type="application/javascript" src="game.js"></script>-->
 <script type="application/javascript" src="mapasmosaico.js"></script>
 </body>
 </html>

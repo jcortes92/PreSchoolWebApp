@@ -12,9 +12,8 @@
     var pressing=[];
     var pause;
     var gameover=true;
-    var player=new Rectangle(25,0,20,20);
+    var player=new Rectangle(100,0,100,100);
     var wall=[];
-    var lava=[];
     var line= [];
     var text= [];
 
@@ -84,16 +83,13 @@
     }
 
     function setMap(map,columns,blockSize){
-        
-
         var col=0;
         var row=0;
         wall.length=0;
-        lava.length=0;
         for(var i=0;i<text.length;i++){
             for(var j=0; j<text[i].length;j++){
                 if((text[i][j]=='+')||(text[i][j]=='|')||(text[i][j]=='-'))
-                    wall.push(new Rectangle(col*blockSize,row*blockSize*2.5,blockSize*2,blockSize*2.5));   
+                    wall.push(new Rectangle(col*blockSize*2.5,row*blockSize*5,blockSize*5,blockSize*5));
                 col++;
                 if(col>=columns){
                     row++;
@@ -106,16 +102,16 @@
     function init(){
         canvas=document.getElementById('canvas2');
         ctx=canvas.getContext('2d');
-        canvas.width=280;
-        canvas.height=450;
-        document.getElementById('out').innerHTML = display(maze(4,3));
-        setMap(text,15,20);
+        canvas.width=900;
+        canvas.height=700;
+        document.getElementById('out').innerHTML = display(maze(3,4));
+        setMap(text,19,20);
         run();
         repaint();
     }
 
     function run(){
-        setTimeout(run,50);
+        setTimeout(run,20);
         act();
     }
 
@@ -180,13 +176,6 @@
             if(player.y<0)
                 player.y += 10;
                 
-            // Player Intersects Lava
-            for(var i=0;i<lava.length;i++){
-                if(player.intersects(lava[i])){
-                    gameover=true;
-                    pause=true;
-                }
-            }
         }
         // Pause/Unpause
         if(lastPress==KEY_ENTER){
@@ -196,20 +185,19 @@
     }
 
     function paint(ctx){
-        ctx.fillStyle='#FFE200';
-        ctx.fillRect(0,0,canvas.width,canvas.height)
+        
+            ctx.fillStyle='#FFE200';
+            ctx.fillRect(0,0,canvas.width,canvas.height);
         ctx.fillStyle='#FF1300';
         player.fill(ctx);
+        player.stroke(ctx);
         ctx.fillStyle='#1379FC';
         for(var i=0;i<wall.length;i++)
             wall[i].fill(ctx);
-        
-//        ctx.fillStyle='#fff';
-//        ctx.fillText('Last Key: '+lastPress,0,20);
         if(pause){
             ctx.textAlign='center';
             if(gameover)
-                ctx.fillText('GAMEOVER',200,75);
+                ctx.fillText('GAMEOVER',200,100);
             else
                 ctx.fillText('PAUSE',200,75);
             ctx.textAlign='left';
@@ -243,6 +231,9 @@
 
     Rectangle.prototype.fill=function(ctx){
         ctx.fillRect(this.x,this.y,this.width,this.height);
+    }
+    Rectangle.prototype.stroke=function(ctx){
+        ctx.strokeRect(this.x,this.y,this.width,this.height);
     }
 
 })();
