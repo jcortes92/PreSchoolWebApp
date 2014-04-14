@@ -19,6 +19,10 @@
 		position: relative;
 		margin-left:auto;
 		margin-right: auto;
+		
+	}
+	#divout{
+		float: left;
 	}
 	</style>
 <meta charset="UTF-8" />
@@ -29,17 +33,19 @@
 
 
 <body>
-<h1>Laberinto TEST</h1>
+
 
 <div id="contenedor">
+<h1>Laberinto TEST</h1>
 	<div id="divcanvas">
 		<p>
 			<canvas id="canvas2" width="450" height="280" style="background:#69FF39">
 				Canvas not supported by your browser.
 			</canvas>
 		</p>
-		<pre id="out"></pre>
+		
 	</div>
+	<!--<div id="divout"><pre id="out"></pre></div>-->
 </div>
 <script type="application/javascript" src="mapasmosaico.js"></script>
 </body>

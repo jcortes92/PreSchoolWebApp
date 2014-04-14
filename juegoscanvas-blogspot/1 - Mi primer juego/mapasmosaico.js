@@ -109,7 +109,7 @@
         ctx=canvas.getContext('2d');
         canvas.width=900;
         canvas.height=700;
-        document.getElementById('out').innerHTML = display(maze(3,4));
+        /*document.getElementById('out').innerHTML = */display(maze(3,4));
         setMap(text,19,20);
         run();
         repaint();
@@ -126,15 +126,15 @@
     }
 
     function reset(){
-        gamewin=false;
 
+        
 
     }
 
     function act(){
         if(!pause){
             
-            if(gamewin)
+            // if(gamewin)
                 //reset();
             
             // Move Rect
@@ -172,9 +172,9 @@
             }
             
             // Out Screen
-            if(player.x>canvas.width-player.width)
+            if(player.x>canvas.width)
                 player.x -= 10;
-            if(player.y>=canvas.height)
+            if(player.y>canvas.height)
                 player.y -= 10;
             if(player.x<0)
                 player.x += 10;
@@ -183,6 +183,7 @@
 
             if(player.intersects(meta)){
                 gamewin=true;
+                setTimeout(function() {window.location.reload();},1250);
             }
             
                 
