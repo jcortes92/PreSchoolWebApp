@@ -11,8 +11,10 @@
     var lastPress=null;
     var pressing=[];
     var pause;
-    var gameover=true;
+    var gamewin;
+
     var player=new Rectangle(100,0,100,100);
+    var meta=new Rectangle(800,500,100,100);
     var wall=[];
     var line= [];
     var text= [];
@@ -111,7 +113,7 @@
     }
 
     function run(){
-        setTimeout(run,20);
+        setTimeout(run,10);
         act();
     }
 
@@ -121,16 +123,16 @@
     }
 
     function reset(){
-        player.x=40;
-        player.y=40;
-        gameover=false;
+        gamewin=false;
+
+
     }
 
     function act(){
         if(!pause){
-            // GameOver Reset
-            if(gameover)
-                reset();
+            
+            if(gamewin)
+                //reset();
             
             // Move Rect
             if(pressing[KEY_UP]){
@@ -175,6 +177,11 @@
                 player.x += 10;
             if(player.y<0)
                 player.y += 10;
+
+            if(player.intersects(meta)){
+                gamewin=true;
+            }
+            
                 
         }
         // Pause/Unpause
@@ -186,21 +193,27 @@
 
     function paint(ctx){
         
-            ctx.fillStyle='#FFE200';
-            ctx.fillRect(0,0,canvas.width,canvas.height);
+        ctx.fillStyle='#FFE200';
+        ctx.fillRect(0,0,canvas.width,canvas.height);
         ctx.fillStyle='#FF1300';
         player.fill(ctx);
         player.stroke(ctx);
+        
+        ctx.fillStyle='#00C618';
+        meta.fill(ctx);
+        meta.stroke(ctx);
         ctx.fillStyle='#1379FC';
         for(var i=0;i<wall.length;i++)
             wall[i].fill(ctx);
-        if(pause){
+        
+        if(gamewin){
+            ctx.font="100px Arial";
+            ctx.fillStyle="#FF1300";
             ctx.textAlign='center';
-            if(gameover)
-                ctx.fillText('GAMEOVER',200,100);
-            else
-                ctx.fillText('PAUSE',200,75);
-            ctx.textAlign='left';
+            ctx.fillText('WIN',400,400);
+        } else if(pause){
+            ctx.textAlign='center';
+            ctx.fillText('PAUSE',200,75);
         }
     }
 
