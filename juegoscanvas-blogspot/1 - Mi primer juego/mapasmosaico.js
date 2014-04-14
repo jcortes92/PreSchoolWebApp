@@ -18,6 +18,9 @@
     var wall=[];
     var line= [];
     var text= [];
+    var iWall=new Image();
+
+    iWall.src='media/legobrick100.png';
 
     //Creación laberinto
     function maze(x,y) {
@@ -204,8 +207,8 @@
         meta.stroke(ctx);
         ctx.fillStyle='#1379FC';
         for(var i=0;i<wall.length;i++)
-            wall[i].fill(ctx);
-        
+            // wall[i].fill(ctx);
+            ctx.drawImage(iWall,wall[i].x,wall[i].y);
         if(gamewin){
             ctx.font="100px Arial";
             ctx.fillStyle="#FF1300";
