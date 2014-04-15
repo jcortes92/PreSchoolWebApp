@@ -96,26 +96,8 @@ img { -webkit-user-select: none !important; }
 	 }
 
 	</style>
-	<script>
-function init() {
-  onLongPress(document.getElementById('.arrow'));
-}
-
-function onLongPress(node) {
-  node.ontouchstart = nullEvent;
-  node.ontouchend = nullEvent;
-  node.ontouchcancel = nullEvent;
-  node.ontouchmove = nullEvent;
-}
-
-function nullEvent(event) {
-  var e = event || window.event;
-  e.preventDefault && e.preventDefault();
-  e.stopPropagation && e.stopPropagation();
-  e.cancelBubble = true;
-  e.returnValue = false;
-  return false;
-}
+	<script type="text/javascript">
+window.oncontextmenu = function () { return false; }
 </script>
 	
 <meta charset="UTF-8" />
