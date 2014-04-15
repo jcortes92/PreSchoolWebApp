@@ -13,7 +13,7 @@
     var pause;
     var gamewin;
 
-    var player=new Rectangle(100,0,100,100);
+    var player=new Rectangle(100,0,60,60);
     var meta=new Rectangle(800,500,100,100);
     var wall=[];
     var line= [];
@@ -116,7 +116,7 @@
     }
 
     function run(){
-        setTimeout(run,10);
+        setTimeout(run,20);
         act();
     }
 
