@@ -5,11 +5,16 @@
 <html lang="es">
 <head>
 	<style>
-	*{
-		font-family: courier;
+	
+	* {
+		
+		font-family: monospace;
 		-webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
     -webkit-user-select: none; 
 	}
+
+	body { -webkit-touch-callout: none !important; }
+img { -webkit-user-select: none !important; }
 	#contenedor{
 		
 		
@@ -48,6 +53,10 @@
 
     	opacity: 0.8;
     	visibility: hidden;
+    	-moz-user-select: none;
+	  	-khtml-user-select: none;
+	  	-webkit-user-select: none;
+	  	user-select: none;
     }
         #up_arrow{ 
             text-align: center; 
@@ -87,33 +96,34 @@
 	 }
 
 	</style>
+	<script>
+function init() {
+  onLongPress(document.getElementById('.arrow'));
+}
+
+function onLongPress(node) {
+  node.ontouchstart = nullEvent;
+  node.ontouchend = nullEvent;
+  node.ontouchcancel = nullEvent;
+  node.ontouchmove = nullEvent;
+}
+
+function nullEvent(event) {
+  var e = event || window.event;
+  e.preventDefault && e.preventDefault();
+  e.stopPropagation && e.stopPropagation();
+  e.cancelBubble = true;
+  e.returnValue = false;
+  return false;
+}
+</script>
+	
 <meta charset="UTF-8" />
 <meta
   name="viewport"
   content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
 <!--[if lte IE 8]><meta http-equiv="X-UA-Compatible" content="chrome=1" /><![endif]-->
 
-<script>
-    function absorbEvent_(event) {
-      var e = event || window.event;
-      e.preventDefault && e.preventDefault();
-      e.stopPropagation && e.stopPropagation();
-      e.cancelBubble = true;
-      e.returnValue = false;
-      return false;
-    }
-
-    function preventLongPressMenu(node) {
-      node.ontouchstart = absorbEvent_;
-      node.ontouchmove = absorbEvent_;
-      node.ontouchend = absorbEvent_;
-      node.ontouchcancel = absorbEvent_;
-    }
-
-    function init() {
-      preventLongPressMenu(document.getElementById('.arrow'));
-    }
-  </script>
 <title>Laberinto TEST</title>
 </head>
 

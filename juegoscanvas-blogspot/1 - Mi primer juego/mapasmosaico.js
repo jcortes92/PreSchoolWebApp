@@ -205,8 +205,8 @@
         meta.stroke(ctx);
         ctx.fillStyle='#1379FC';
         for(var i=0;i<wall.length;i++)
-            // wall[i].fill(ctx);
-            ctx.drawImage(iWall,wall[i].x,wall[i].y);
+             wall[i].fill(ctx);
+            //ctx.drawImage(iWall,wall[i].x,wall[i].y);
         if(gamewin){
             ctx.font="100px Arial";
             ctx.fillStyle="#FF1300";
