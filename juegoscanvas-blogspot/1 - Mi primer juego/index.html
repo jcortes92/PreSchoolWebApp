@@ -106,9 +106,11 @@
 		#divcanvas canvas{
 			margin: 0;
 			height: 100%;
+			margin-top: 0;
+
 		}
 		* {
-			margin-top: 0px;
+			margin-top: 0;
 		}
 	 }
 
@@ -135,18 +137,19 @@ window.oncontextmenu = function () { return false; }
 <h1>Laberinto TEST</h1>
 
 	<div id="central">
+		
+		<div id="divcanvas">
+			<canvas id="canvas2" width="450" height="280" style="background:#69FF39">
+				Canvas not supported by your browser.
+			</canvas>
+		</div>
 		<div id="controls"> 
 	    
 		    <img id="up_arrow"src="media/up_arrow_hi.png" class="arrow"/>
 		    <img id="left_arrow" src="media/left_arrow_hi.png" class="arrow"/>
 		    <img id="right_arrow" src="media/right_arrow_hi.png" class="arrow"/>
 		    <img id="down_arrow" src="media/down_arrow_hi.png" class="arrow"/>
-</div> 
-		<div id="divcanvas">
-			<canvas id="canvas2" width="450" height="280" style="background:#69FF39">
-				Canvas not supported by your browser.
-			</canvas>
-		</div>
+		</div> 
 	
 	</div>
 	<!--<div id="divout"><pre id="out"></pre></div>-->
