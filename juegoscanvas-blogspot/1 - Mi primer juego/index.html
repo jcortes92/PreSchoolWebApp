@@ -6,15 +6,14 @@
 <head>
 	<style>
 	
-	* {
-		
+	body {
 		font-family: monospace;
 		-webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
-    -webkit-user-select: none; 
+    	-webkit-user-select: none; 
 	}
 
 	body { -webkit-touch-callout: none !important; }
-img { -webkit-user-select: none !important; }
+	img { -webkit-user-select: none !important; }
 	#contenedor{
 		
 		
@@ -24,17 +23,19 @@ img { -webkit-user-select: none !important; }
 		text-align: center;
 		border: 1px solid black;
 	}
-	#divcanvas{
+	#central{
 		
 		position: relative;
 		margin-left:auto;
 		margin-right: auto;
 		z-index: 0;
+
 		
 	}
-	#divcanvas canvas{
+	#central canvas{
 		width: 90%;
 		z-index: 0;
+		margin-bottom: 4%;
 	}
 	#controls{ 
             position: absolute; ; 
@@ -43,9 +44,7 @@ img { -webkit-user-select: none !important; }
             top: 50%;
 
             z-index: 1;
-            width: 50%;
-
-            
+            width: 50%;   
         } 
     #controls img{
     	width: 30%;
@@ -80,6 +79,9 @@ img { -webkit-user-select: none !important; }
 		#controls img {
 			visibility: visible;
 		}
+		#central{padding:1%;}
+		
+
 		
 	 }
 	 @media only screen and (max-width: 800px) and (max-height: 800px) {
@@ -89,9 +91,24 @@ img { -webkit-user-select: none !important; }
 			margin: 0px;
 			height: 0px;
 		}
+		#contenedor{
+			border: none;
+			margin-left:auto;
+			margin-right: auto;
+			height: 100%;
+		}
 		#divcanvas{
-			padding-top: 0px;
-			margin: 0px;
+			/*margin: 10%;*/
+			margin-right: 0;
+			margin-left: 0;
+			/*height: 100%;*/
+		}
+		#divcanvas canvas{
+			margin: 0;
+			height: 100%;
+		}
+		* {
+			margin-top: 0px;
 		}
 	 }
 
@@ -99,7 +116,8 @@ img { -webkit-user-select: none !important; }
 	<script type="text/javascript">
 window.oncontextmenu = function () { return false; }
 </script>
-	
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta names="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <meta charset="UTF-8" />
 <meta
   name="viewport"
@@ -116,7 +134,7 @@ window.oncontextmenu = function () { return false; }
 <div id="contenedor">
 <h1>Laberinto TEST</h1>
 
-	<div id="divcanvas">
+	<div id="central">
 		<div id="controls"> 
 	    
 		    <img id="up_arrow"src="media/up_arrow_hi.png" class="arrow"/>
@@ -124,11 +142,11 @@ window.oncontextmenu = function () { return false; }
 		    <img id="right_arrow" src="media/right_arrow_hi.png" class="arrow"/>
 		    <img id="down_arrow" src="media/down_arrow_hi.png" class="arrow"/>
 </div> 
-		<p>
+		<div id="divcanvas">
 			<canvas id="canvas2" width="450" height="280" style="background:#69FF39">
 				Canvas not supported by your browser.
 			</canvas>
-		</p>
+		</div>
 	
 	</div>
 	<!--<div id="divout"><pre id="out"></pre></div>-->
