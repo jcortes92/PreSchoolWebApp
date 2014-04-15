@@ -265,6 +265,14 @@ window.addEventListener('load', function(){ // on page load
  
 }, false)
 
+// window or document
+window.addEventListener("touchmove", function(event) {
+  if (!event.target.classList.contains('scrollable')) {
+    // no more scrolling
+    event.preventDefault();
+  }
+}, false);
+
     
     function Rectangle(x,y,width,height){
         this.x=(x==null)?0:x;

@@ -29,6 +29,7 @@
 	}
 	#divcanvas canvas{
 		width: 90%;
+		z-index: 0;
 	}
 	/*#instrucciones{
 		float: right;
@@ -43,23 +44,27 @@
 */
 	#controls{ 
             position: absolute; ; 
-            top: 30%;
+            top: 50%;
             left: 50%;
 
             z-index: 1;
-            width: 280px;
+            width: 200px;
+
             
         } 
     #controls img{
     	width: 100px;
     	height: auto;
+
     	opacity: 0.8;
     }
         #up_arrow{ 
             text-align: center; 
+            margin: -4px;
         } 
         #left_arrow{ 
             float: left; 
+
         } 
         #right_arrow{ 
             float: right; 
@@ -88,13 +93,23 @@
 
 <div id="contenedor">
 <h1>Laberinto TEST</h1>
-<div id="controls"> 
-	    <div id="up_arrow"><img src="media/up_arrow_hi.png" class="arrow"/></div> 
+<!-- <div id="controls"> 
+	    <div id="up_arrow">
+	    	<img src="media/up_arrow_hi.png" class="arrow"/>
+	    </div> 
 	    <div id="left_arrow"><img src="media/left_arrow_hi.png" class="arrow"/></div> 
 	    <div id="right_arrow"><img src="media/right_arrow_hi.png" class="arrow"/></div> 
 	    <div id="down_arrow"><img src="media/down_arrow_hi.png" class="arrow"/></div> 
-	</div> 
+</div>  -->
+
 	<div id="divcanvas">
+		<div id="controls"> 
+	    
+		    <img id="up_arrow"src="media/up_arrow_hi.png" class="arrow"/>
+		    <img id="left_arrow" src="media/left_arrow_hi.png" class="arrow"/>
+		    <img id="right_arrow" src="media/right_arrow_hi.png" class="arrow"/>
+		    <img id="down_arrow" src="media/down_arrow_hi.png" class="arrow"/>
+</div> 
 		<p>
 			<canvas id="canvas2" width="450" height="280" style="background:#69FF39">
 				Canvas not supported by your browser.
