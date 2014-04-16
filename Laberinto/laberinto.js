@@ -18,6 +18,9 @@
     var wall=[];
     var line= [];
     var text= [];
+    var aWIN= new Audio();
+
+    aWIN.src='media/smw_1-up.m4a';
 
     
     //Animación Instrucciones
@@ -66,12 +69,11 @@
                                         setTimeout(function(){
                                             controls.style.display="inline";
                                             titulo.style.display="inline";
-                                        },3000);
+                                        },2000);
                                     },2000)
                                 },2000);
                             },1000);
                         },1000);
-                    // },1000);
                 },1000);
             },1000);
         } 
@@ -180,7 +182,7 @@
     }
 
     function run(){
-        setTimeout(run,10);
+        setTimeout(run,30);
         act();
     }
 
@@ -237,6 +239,8 @@
 
         if(player.intersects(meta)){
             gamewin=true;
+            aWIN.play();
+            
             setTimeout(function() {location.reload();},1250);
         } 
 
