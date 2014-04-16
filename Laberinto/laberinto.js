@@ -1,6 +1,7 @@
+
 (function(){
     'use strict';
-    window.addEventListener('load',instrucciones,false);
+    window.addEventListener('load',init,false);
     var KEY_ENTER=13;
     var KEY_LEFT=37;
     var KEY_UP=38;
@@ -28,25 +29,17 @@
         var w = canvas.width, h = canvas.height;
         var i = 0;
         var controls = document.getElementById("controls");
-controls.style.display="none";
+        var titulo = document.getElementById('titulo');
+        controls.style.display="none";
+        titulo.style.display="none";
         if(hechoInstrucciones){
-            //DIBUJAR FONDO
-            // do {
-            //     ctx.fillStyle = "rgb(" + Math.round(255*Math.random()) + ","
-            //           + Math.round(255*Math.random()) + ","
-            //           + Math.round(255*Math.random()) + ")";
-            //     ctx.beginPath();
-            //     ctx.arc(w*Math.random(), h*Math.random(),
-            //     50*Math.random(),
-            //     0, Math.PI*2, true);
-            //     ctx.closePath();
-            //     ctx.fill();
-            // } while (++i != 1000);
             ctx.fillStyle='#000';
             ctx.fillRect(0,0,canvas.width,canvas.height);
             
+            // setTimeout(function(){
+                    
+            //     },1000);
             
-            hechoInstrucciones = false;
             setTimeout(function(){
                 ctx.font="120px Courier";
                 ctx.fillStyle="#FFFFFF";
@@ -54,14 +47,35 @@ controls.style.display="none";
                 ctx.fillText('LABERINTO',450,400);
                 ctx.fillStyle="#000";
                 ctx.strokeText('LABERINTO',450,400);
-                
                 setTimeout(function(){
-                    
-                    controls.style.display="inline";
-                    init();
+                    ctx.fillStyle='#000';
+                    ctx.fillRect(0,0,canvas.width,canvas.height);
+                        setTimeout(function(){
+                            ctx.fillStyle='#000';
+                            ctx.fillRect(0,0,canvas.width,canvas.height);
+                            setTimeout(function(){
+                                ctx.fillStyle='#FF1300';
+                                player.fill(ctx);
+                                player.stroke(ctx);
+                                setTimeout(function(){
+                                    ctx.fillStyle='#00C618';
+                                    meta.fill(ctx);
+                                    setTimeout(function(){
+                                        ctx.fillStyle='#000';
+                                        ctx.fillRect(0,0,canvas.width,canvas.height);
+                                        setTimeout(function(){
+                                            controls.style.display="inline";
+                                            titulo.style.display="inline";
+                                        },3000);
+                                    },2000)
+                                },2000);
+                            },1000);
+                        },1000);
+                    // },1000);
                 },1000);
             },1000);
         } 
+        hechoInstrucciones = false;
     }
         
 
@@ -150,15 +164,19 @@ controls.style.display="none";
     }
 
     function init(){
-        
         canvas=document.getElementById('canvas');
         ctx=canvas.getContext('2d');
         canvas.width=900;
         canvas.height=700;
-        /*document.getElementById('out').innerHTML = */display(maze(3,4));
+        /*document.getElementById('out').innerHTML = */
+        display(maze(3,4));
         setMap(text,19,20);
-        run();
-        repaint();
+        if(hechoInstrucciones) instrucciones();
+        setTimeout(function(){
+            run();
+            repaint();            
+        },10000);
+        
     }
 
     function run(){
@@ -171,8 +189,6 @@ controls.style.display="none";
         paint(ctx);
     }
 
-    function reset(){
-    }
 
     function act(){            
         // Move Rect
