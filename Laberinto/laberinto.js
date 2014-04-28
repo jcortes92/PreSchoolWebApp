@@ -18,9 +18,9 @@
     var wall=[];
     var line= [];
     var text= [];
-    var aWIN= new Audio();
+    // var aWIN= new Audio();
 
-    aWIN.src='media/smw_1-up.m4a';
+    // aWIN.src='media/smw_1-up.m4a';
 
     
     //Animación Instrucciones
@@ -239,7 +239,7 @@ hechoInstrucciones = false;
 
         if(player.intersects(meta)){
             gamewin=true;
-            aWIN.play();
+            // aWIN.play();
             
             setTimeout(function() {location.reload();},1250);
         } 
