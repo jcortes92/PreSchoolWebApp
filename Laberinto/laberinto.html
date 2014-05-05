@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<!--320-->
+<!--http://juegoscanvas.blogspot.com.es/
+-->
+<html lang="es">
+<head>
+	<style>
+	
+	body {
+		font-family: monospace;
+		-webkit-touch-callout: none !important;
+		/* prevent callout to copy image, etc when tap to hold */
+		-webkit-user-select: none; 
+	}
+	#contenedor{
+		position: relative;
+		width: 66%;
+		margin-left: auto;
+		margin-right: auto;
+		text-align: center;
+		border: 1px solid black;
+	}
+	#central{
+		position: relative;
+		margin-left:auto;
+		margin-right: auto;
+		
+	}
+	#divcanvas canvas{
+		position: relative;
+		width: 90%;
+		z-index: 0;
+		margin-bottom: 4%;
+	}
+	#controls{ 
+		position: absolute;
+		top: 30%;
+		right: 20%;
+		z-index: 100;
+		width: 60%;   
+	} 
+	#controls img{
+		width: 30%;
+		height: auto;
+
+		opacity: 0.8;
+		visibility: hidden;
+		-moz-user-select: none;
+		-khtml-user-select: none;
+		-webkit-user-select: none !important;;
+		user-select: none;
+	}
+	#up_arrow{ 
+		text-align: center; 
+		margin: -4px;
+	} 
+	#left_arrow{ 
+		float: left; 
+
+	} 
+	#right_arrow{ 
+		float: right; 
+	} 
+	#down_arrow{ 
+		clear: both; 
+		text-align: center; 
+	} 
+	.arrow{ 
+		width: 44px; 
+	} 
+	@media only screen and (max-width: 1024px) and (max-height: 1024px) {
+		h1{
+			margin:10px;
+		}
+		#controls img {
+			visibility: visible;
+		}
+		#central{
+			padding:1%;
+		}
+		#contenedor{
+			width: 80%;
+		}
+		
+	}
+	@media only screen and (max-width: 800px) and (max-height: 800px) {
+		
+		h1{
+			visibility: visible;
+			margin: 0px;
+			height: 0px;
+		}
+		#contenedor{
+			border: none;
+			margin-left:auto;
+			margin-right: auto;
+			height: 100%;
+		}
+		#divcanvas{
+			/*margin: 10%;*/
+			margin-right: 0;
+			margin-left: 0;
+			/*height: 100%;*/
+		}
+		#divcanvas canvas{
+			margin: 0;
+			height: 100%;
+			margin-top: 0;
+
+		}
+		* {
+			margin-top: 0;
+		}
+	}
+
+	</style>
+	<script type="text/javascript">
+	window.oncontextmenu = function () { return false; }
+	</script>
+	
+	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<script type="application/javascript" src="laberinto.js"></script>
+	
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta names="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+	<meta charset="UTF-8" />
+	<meta
+	name="viewport"
+	content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+	<!--[if lte IE 8]><meta http-equiv="X-UA-Compatible" content="chrome=1" /><![endif]-->
+
+	<title>Laberinto</title>
+</head>
+
+
+<body>
+
+
+	<div id="contenedor">
+		<h1 id="titulo">Laberinto</h1>
+
+		<div id="central">
+
+			<div id="divcanvas">
+				<canvas id="canvas" width="450" height="280" style="background:#BFBFBF">
+					Canvas not supported by your browser.
+				</canvas>
+			</div>
+			<div id="controls"> 
+
+				<img id="up_arrow"src="media/up_arrow_hi.png" class="arrow"/>
+				<img id="left_arrow" src="media/left_arrow_hi.png" class="arrow"/>
+				<img id="right_arrow" src="media/right_arrow_hi.png" class="arrow"/>
+				<img id="down_arrow" src="media/down_arrow_hi.png" class="arrow"/>
+			</div> 
+
+		</div>
+		<!--<div id="divout"><pre id="out"></pre></div>-->
+	<!--<div id="instrucciones">
+		<img src="media/arrowkeys.png">
+	</div>-->	
+</div>
+
+
+
+</body>
+</html>
