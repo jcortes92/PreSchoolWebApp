@@ -1,6 +1,7 @@
 (function(){
         'use strict';
         window.addEventListener('load',instrucciones,false);
+
 //Animación Instrucciones
     function instrucciones() {
         var canvas = document.getElementById("canvas");
@@ -57,7 +58,7 @@
 
     
 
-    // window or document
+    //Deshabilita el scroll en pantalla
     window.addEventListener("touchmove", function(event) {
       if (!event.target.classList.contains('scrollable')) {
         // no more scrolling

@@ -11,78 +11,15 @@
     var lastPress=null;
     var pressing=[];
     var gamewin;
-    // var hechoInstrucciones = true;
+
     var player=new Rectangle(110,0,80,80);
     var meta=new Rectangle(800,500,100,100);
     var wall=[];
     var line= [];
     var text= [];
-    // var aWIN= new Audio();
-
-    // aWIN.src='media/smw_1-up.m4a';
-
-    
-//     //Animación Instrucciones
-//     function instrucciones() {
-//         var canvas = document.getElementById("canvas");
-//         var ctx = canvas.getContext("2d");
-//         canvas.width=900;
-//         canvas.height=700;
-//         var w = canvas.width, h = canvas.height;
-//         var i = 0;
-//         var controls = document.getElementById("controls");
-//         var titulo = document.getElementById('titulo');
-//         controls.style.display="none";
-//         titulo.style.display="none";
-//         if(hechoInstrucciones){
-//             ctx.fillStyle='#000';
-//             ctx.fillRect(0,0,canvas.width,canvas.height);
-            
-//             // setTimeout(function(){
-                
-//             //     },1000);
-
-// setTimeout(function(){
-//     ctx.font="120px Courier";
-//     ctx.fillStyle="#FFFFFF";
-//     ctx.textAlign='center';
-//     ctx.fillText('LABERINTO',450,400);
-//     ctx.fillStyle="#000";
-//     ctx.strokeText('LABERINTO',450,400);
-//     setTimeout(function(){
-//         ctx.fillStyle='#000';
-//         ctx.fillRect(0,0,canvas.width,canvas.height);
-//         setTimeout(function(){
-//             ctx.fillStyle='#000';
-//             ctx.fillRect(0,0,canvas.width,canvas.height);
-//             setTimeout(function(){
-//                 ctx.fillStyle='#FF1300';
-//                 player.fill(ctx);
-//                 player.stroke(ctx);
-//                 setTimeout(function(){
-//                     ctx.fillStyle='#00C618';
-//                     meta.fill(ctx);
-//                     setTimeout(function(){
-//                         ctx.fillStyle='#000';
-//                         ctx.fillRect(0,0,canvas.width,canvas.height);
-//                         setTimeout(function(){
-//                             controls.style.display="inline";
-//                             titulo.style.display="inline";
-//                         },2000);
-//                     },2000)
-//                 },2000);
-//             },1000);
-//         },1000);
-//     },1000);
-// },1000);
-// } 
-// hechoInstrucciones = false;
-// }
-
-
-
 
     //Creación laberinto
+    //Algoritmo: Simple Depth-First Search
     function maze(x,y) {
         var n=x*y-1;
         if (n<0) {alert("illegal maze dimensions");return;}
@@ -145,54 +82,53 @@
                                     text.push(line.join('')+'\r\n');
                                 }
                                 return text.join('');
-                            }
+    }
 
-                            function setMap(map,columns,blockSize){
-                                var col=0;
-                                var row=0;
-                                wall.length=0;
-                                for(var i=0;i<text.length;i++){
-                                    for(var j=0; j<text[i].length;j++){
-                                        if((text[i][j]=='+')||(text[i][j]=='|')||(text[i][j]=='-'))
-                                            wall.push(new Rectangle(col*blockSize*2.5,row*blockSize*5,blockSize*5,blockSize*5));
-                                        col++;
-                                        if(col>=columns){
-                                            row++;
-                                            col=0;
-                                        }
-                                    }
-                                }
-                            }
+    function setMap(map,columns,blockSize){
+        var col=0;
+        var row=0;
+        wall.length=0;
+        for(var i=0;i<text.length;i++){
+            for(var j=0; j<text[i].length;j++){
+                if((text[i][j]=='+')||(text[i][j]=='|')||(text[i][j]=='-'))
+                    wall.push(new Rectangle(col*blockSize*2.5,row*blockSize*5,blockSize*5,blockSize*5));
+                col++;
+                if(col>=columns){
+                    row++;
+                    col=0;
+                }
+            }
+        }
+    }
 
-                            function init(){
-                                canvas=document.getElementById('canvas');
-                                ctx=canvas.getContext('2d');
-                                canvas.width=900;
-                                canvas.height=700;
-                                /*document.getElementById('out').innerHTML = */
-                                display(maze(3,4));
-                                setMap(text,19,20);
-                                // if(hechoInstrucciones) instrucciones();
-                                // setTimeout(function(){
-                                    run();
-                                    repaint();            
-                                // },10000);
-                                
-                            }
+    function init(){
+        canvas=document.getElementById('canvas');
+        ctx=canvas.getContext('2d');
+        canvas.width=900;
+        canvas.height=700;
+        /*document.getElementById('out').innerHTML = */
+        display(maze(3,4));
+        setMap(text,19,20);
+        
+        run();
+        repaint();            
+        
+        
+    }
 
-                            function run(){
-                                setTimeout(run,30);
-                                act();
-                            }
+    function run(){
+        setTimeout(run,30);
+        act();
+    }
 
-                            function repaint(){
-                                requestAnimationFrame(repaint);
-                                paint(ctx);
-                            }
+    function repaint(){
+        requestAnimationFrame(repaint);
+        paint(ctx);
+    }
 
 
-                            function act(){            
-        // Move Rect
+    function act(){            
+        // Movimiento del jugador
         if(pressing[KEY_UP]){
             player.y-=10;
             for(var i=0;i<wall.length;i++){
@@ -226,7 +162,7 @@
             }
         }
         
-        // Out Screen
+        // Límites del canvas
         if(player.x>canvas.width)
             player.x -= 10;
         if(player.y>canvas.height)
@@ -238,8 +174,6 @@
 
         if(player.intersects(meta)){
             gamewin=true;
-            // aWIN.play();
-            
             setTimeout(function() {location.reload();},1250);
         } 
 
@@ -257,8 +191,8 @@
         meta.fill(ctx);
         ctx.fillStyle='#1379FC';
         for(var i=0;i<wall.length;i++)
-           wall[i].fill(ctx);
-            //ctx.drawImage(iWall,wall[i].x,wall[i].y);
+            wall[i].fill(ctx);
+            
             if(gamewin){
                 ctx.font="120px Arial";
                 ctx.fillStyle="#FF1300";
@@ -277,75 +211,75 @@
             pressing[evt.keyCode]=false;
         },false);
         
-window.addEventListener('load', function(){ // on page load
-   
-   document.getElementById('up_arrow').addEventListener('touchstart', function(e){
-      pressing[KEY_UP]=true;
-  }, false)
+    window.addEventListener('load', function(){ // on page load
+       
+       document.getElementById('up_arrow').addEventListener('touchstart', function(e){
+          pressing[KEY_UP]=true;
+      }, false)
 
-   document.getElementById('up_arrow').addEventListener('touchend', function(e){
-      pressing[KEY_UP]=false;
-  }, false)
-
-
-   document.getElementById('down_arrow').addEventListener('touchstart', function(e){
-      pressing[KEY_DOWN]=true;
-  }, false)
-
-   document.getElementById('down_arrow').addEventListener('touchend', function(e){
-      pressing[KEY_DOWN]=false;
-  }, false)
-
-   document.getElementById('left_arrow').addEventListener('touchstart', function(e){
-      pressing[KEY_LEFT]=true;
-  }, false)
-
-   document.getElementById('left_arrow').addEventListener('touchend', function(e){
-      pressing[KEY_LEFT]=false;
-  }, false)
-
-   document.getElementById('right_arrow').addEventListener('touchstart', function(e){
-      pressing[KEY_RIGHT]=true;
-  }, false)
-
-   document.getElementById('right_arrow').addEventListener('touchend', function(e){
-      pressing[KEY_RIGHT]=false;
-  }, false)
-   
-   
-}, false)
-
-// window or document
-window.addEventListener("touchmove", function(event) {
-  if (!event.target.classList.contains('scrollable')) {
-    // no more scrolling
-    event.preventDefault();
-}
-}, false);
+       document.getElementById('up_arrow').addEventListener('touchend', function(e){
+          pressing[KEY_UP]=false;
+      }, false)
 
 
+       document.getElementById('down_arrow').addEventListener('touchstart', function(e){
+          pressing[KEY_DOWN]=true;
+      }, false)
 
-function Rectangle(x,y,width,height){
-    this.x=(x==null)?0:x;
-    this.y=(y==null)?0:y;
-    this.width=(width==null)?0:width;
-    this.height=(height==null)?this.width:height;
-}
+       document.getElementById('down_arrow').addEventListener('touchend', function(e){
+          pressing[KEY_DOWN]=false;
+      }, false)
 
-Rectangle.prototype.intersects=function(rect){
-    if(rect!=null){
-        return(this.x<rect.x+rect.width&&
-            this.x+this.width>rect.x&&
-            this.y<rect.y+rect.height&&
-            this.y+this.height>rect.y);
+       document.getElementById('left_arrow').addEventListener('touchstart', function(e){
+          pressing[KEY_LEFT]=true;
+      }, false)
+
+       document.getElementById('left_arrow').addEventListener('touchend', function(e){
+          pressing[KEY_LEFT]=false;
+      }, false)
+
+       document.getElementById('right_arrow').addEventListener('touchstart', function(e){
+          pressing[KEY_RIGHT]=true;
+      }, false)
+
+       document.getElementById('right_arrow').addEventListener('touchend', function(e){
+          pressing[KEY_RIGHT]=false;
+      }, false)
+       
+       
+    }, false)
+
+    //Deshabilita el scroll en pantalla
+    window.addEventListener("touchmove", function(event) {
+      if (!event.target.classList.contains('scrollable')) {
+        // no more scrolling
+        event.preventDefault();
     }
-}
+    }, false);
 
-Rectangle.prototype.fill=function(ctx){
-    ctx.fillRect(this.x,this.y,this.width,this.height);
-}
-Rectangle.prototype.stroke=function(ctx){
-    ctx.strokeRect(this.x,this.y,this.width,this.height);
-}
+
+
+    function Rectangle(x,y,width,height){
+        this.x=(x==null)?0:x;
+        this.y=(y==null)?0:y;
+        this.width=(width==null)?0:width;
+        this.height=(height==null)?this.width:height;
+    }
+
+    Rectangle.prototype.intersects=function(rect){
+        if(rect!=null){
+            return(this.x<rect.x+rect.width&&
+                this.x+this.width>rect.x&&
+                this.y<rect.y+rect.height&&
+                this.y+this.height>rect.y);
+        }
+    }
+
+    Rectangle.prototype.fill=function(ctx){
+        ctx.fillRect(this.x,this.y,this.width,this.height);
+    }
+    Rectangle.prototype.stroke=function(ctx){
+        ctx.strokeRect(this.x,this.y,this.width,this.height);
+    }
 
 })();
