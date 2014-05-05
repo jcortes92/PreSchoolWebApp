@@ -12,7 +12,7 @@
     var lastPress=null;
     var pressing=[];
     var gamewin;
-    var hechoInstrucciones = true;
+    
     var player=new Rectangle(110,0,80,80);
     var meta=new Rectangle(800,500,100,100);
     var wall=[];
@@ -35,7 +35,6 @@
         var titulo = document.getElementById('titulo');
         controls.style.display="none";
         titulo.style.display="none";
-        if(hechoInstrucciones){
             ctx.fillStyle='#000';
             ctx.fillRect(0,0,canvas.width,canvas.height);
 
@@ -73,8 +72,6 @@
                     },1000);
                 },1000);
             },1000);
-            } 
-        hechoInstrucciones = false;
 }
 
 
@@ -116,7 +113,7 @@
             }
             return {x: x, y: y, horiz: horiz, verti: verti};
         }
-        
+
      //Dibujar laberinto ASCII
      function display(m) {
         for (var j= 0; j<m.x*2+1; j++) {
