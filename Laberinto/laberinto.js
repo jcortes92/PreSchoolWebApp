@@ -106,7 +106,7 @@
         ctx=canvas.getContext('2d');
         canvas.width=900;
         canvas.height=700;
-        /*document.getElementById('out').innerHTML = */
+        document.getElementById('out').innerHTML = 
         display(maze(3,4));
         setMap(text,19,20);
         
